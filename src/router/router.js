@@ -5,6 +5,7 @@ import Router from "vue-router";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Test from "@/components/Test.vue";
 import Api from "@/components/api.vue";
+import Kakao_Login from "@/components/kakao_login.vue";
 
 // 필수
 Vue.use(Router);
@@ -25,6 +26,11 @@ export default new Router({
       path: "/api",
       name: "api",
       component: Api,
+    },
+    {
+      path: "/accout/kakaologin",
+      name: "kakao_login",
+      component: Kakao_Login,
     },
   ],
 });

@@ -9,158 +9,103 @@
           height="200"
         />
       </v-col>
-
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify123
-        </h1>
-        <div id="example-2">
-          <button @click="testing">AlertButton</button>
-        </div>
-        <h3>
-          <router-link to="/test">Test_Page</router-link>
-        </h3>
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br />please join our online
-          <a href="https://community.vuetifyjs.com" target="_blank"
-            >Discord Community</a
-          >
-        </p>
-      </v-col>
-
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
+      <v-col> </v-col>
     </v-row>
+    <v-card class="mx-auto text-center" color="green" dark max-width="600">
+      <v-card-text>
+        <v-sheet color="rgba(0, 0, 0, .12)">
+          <v-sparkline
+            :value="value"
+            color="rgba(255, 255, 255, .7)"
+            height="100"
+            padding="24"
+            stroke-linecap="round"
+            smooth
+          >
+            <template v-slot:label="item"> ${{ item.value }} </template>
+          </v-sparkline>
+        </v-sheet>
+      </v-card-text>
+
+      <v-card-text>
+        <div class="display-1 font-weight-thin">
+          Sales Last 24h
+        </div>
+      </v-card-text>
+
+      <v-divider></v-divider>
+
+      <v-card-actions class="justify-center">
+        <v-btn block text>
+          Go to Report
+        </v-btn>
+      </v-card-actions>
+    </v-card>
   </v-container>
 </template>
 
 <script>
-// var example2 = new Vue({
-//   el: "#example-2",
-//   data: {
-//     name: "Vue.js",
-//   },
-//   // 메소드는 `methods` 객체 안에 정의합니다
-//   methods: {
-//     greet: function(event) {
-//       // 메소드 안에서 사용하는 `this` 는 Vue 인스턴스를 가리킵니다
-//       alert("Hello " + this.name + "!");
-//       // `event` 는 네이티브 DOM 이벤트입니다
-//       if (event) {
-//         alert(event.target.tagName);
-//       }
-//     },
-//   },
-// });
 export default {
   name: "HelloWorld",
 
-  data: () => ({
-    ecosystem: [
-      {
-        text: "vuetify-loader",
-        href: "https://github.com/vuetifyjs/vuetify-loader",
-      },
-      {
-        text: "github",
-        href: "https://github.com/vuetifyjs/vuetify",
-      },
-      {
-        text: "awesome-vuetify",
-        href: "https://github.com/vuetifyjs/awesome-vuetify",
-      },
-    ],
-    importantLinks: [
-      {
-        text: "Documentation",
-        href: "https://vuetifyjs.com",
-      },
-      {
-        text: "Chat",
-        href: "https://community.vuetifyjs.com",
-      },
-      {
-        text: "Made with Vuetify",
-        href: "https://madewithvuejs.com/vuetify",
-      },
-      {
-        text: "Twitter",
-        href: "https://twitter.com/vuetifyjs",
-      },
-      {
-        text: "Articles",
-        href: "https://medium.com/vuetify",
-      },
-    ],
-    whatsNext: [
-      {
-        text: "Explore components",
-        href: "https://vuetifyjs.com/components/api-explorer",
-      },
-      {
-        text: "Select a layout",
-        href: "https://vuetifyjs.com/getting-started/pre-made-layouts",
-      },
-      {
-        text: "Frequently Asked Questions",
-        href:
-          "https://vuetifyjs.com/getting-started/frequently-asked-questions",
-      },
-    ],
-  }),
+  data: () => (
+    {
+      value: [423, 446, 675, 510, 590, 610, 760],
+    },
+    {
+      ecosystem: [
+        {
+          text: "vuetify-loader",
+          href: "https://github.com/vuetifyjs/vuetify-loader",
+        },
+        {
+          text: "github",
+          href: "https://github.com/vuetifyjs/vuetify",
+        },
+        {
+          text: "awesome-vuetify",
+          href: "https://github.com/vuetifyjs/awesome-vuetify",
+        },
+      ],
+      importantLinks: [
+        {
+          text: "Documentation",
+          href: "https://vuetifyjs.com",
+        },
+        {
+          text: "Chat",
+          href: "https://community.vuetifyjs.com",
+        },
+        {
+          text: "Made with Vuetify",
+          href: "https://madewithvuejs.com/vuetify",
+        },
+        {
+          text: "Twitter",
+          href: "https://twitter.com/vuetifyjs",
+        },
+        {
+          text: "Articles",
+          href: "https://medium.com/vuetify",
+        },
+      ],
+      whatsNext: [
+        {
+          text: "Explore components",
+          href: "https://vuetifyjs.com/components/api-explorer",
+        },
+        {
+          text: "Select a layout",
+          href: "https://vuetifyjs.com/getting-started/pre-made-layouts",
+        },
+        {
+          text: "Frequently Asked Questions",
+          href:
+            "https://vuetifyjs.com/getting-started/frequently-asked-questions",
+        },
+      ],
+    }
+  ),
   methods: {
     testing() {
       alert(333);
