@@ -1,4 +1,3 @@
-<!--
 <template>
   <div id="kakao-login">
     <button @click="kakaoLogin">
@@ -45,6 +44,9 @@
         </g>
       </svg>
     </button>
+    <v-container>
+      <img class="kakao_btn" src="@/assets/logo.png" @click="GetMe" />
+    </v-container>
   </div>
 </template>
 
@@ -54,9 +56,17 @@ export default {
   methods: {
     kakaoLogin() {
       // console.log(window.Kakao);
-      window.Kakao.Auth.login({
-        scope: "account_email, gender",
-        success: this.GetMe,
+      //   window.Kakao.Auth.login({
+      //     scope: "account_email, gender",
+      //     success: this.GetMe,
+      //   });
+      this.$kakao.Auth.login({
+        success(authObj) {
+          alert(JSON.stringify(authObj));
+        },
+        fail(err) {
+          alert(JSON.stringify(err));
+        },
       });
     },
     GetMe(authObj) {
@@ -65,17 +75,16 @@ export default {
         url: "/v2/user/me",
         success: (res) => {
           const kakao_account = res.kakao_account;
+          console.log(res);
           const userInfo = {
-            nickname: kakao_account.profile.nickname,
             email: kakao_account.email,
             password: "",
             account_type: 2,
           };
 
           axios
-            .post(`http://localhost:8080/account/kakao`, {
+            .post(`http://localhost:8080/account/kakaologin`, {
               email: userInfo.email,
-              nickname: userInfo.nickname,
             })
             .then((res) => {
               console.log(res);
@@ -98,22 +107,35 @@ export default {
   },
 };
 </script>
--->
-
+<!--
 <template>
-  <img class="kakao_btn" src="@/assets/logo.png" @click="loginWithKakao" />
+  <v-container>
+    <img class="kakao_btn" src="@/assets/logo.png" @click="loginWithKakao" />
+  </v-container>
 </template>
 
 <script>
 export default {
   name: "LoginKakao",
+  // kakao
   methods: {
+    shareStoryWeb() {
+      this.$kakao.Story.share({
+        url: "https://github.com/eggplantiny/vue-kakao-sdk",
+        text: "Test story share with vue-kakao-sdk",
+      });
+    },
     loginWithKakao() {
-      const params = {
-        redirectUri: "http://localhost:8080/account/kakaologin",
-      };
-      window.Kakao.Auth.authorize(params);
+      this.$kakao.Auth.login({
+        success(authObj) {
+          alert(JSON.stringify(authObj));
+        },
+        fail(err) {
+          alert(JSON.stringify(err));
+        },
+      });
     },
   },
 };
 </script>
+-->

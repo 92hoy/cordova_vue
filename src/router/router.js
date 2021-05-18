@@ -5,7 +5,7 @@ import Router from "vue-router";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Test from "@/components/Test.vue";
 import Api from "@/components/api.vue";
-import Kakao_Login from "@/components/kakao_login.vue";
+import Kakao_Login from "@/components/login/kakao_login.vue";
 
 // 필수
 Vue.use(Router);
