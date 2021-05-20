@@ -51,52 +51,74 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   methods: {
     kakaoLogin() {
-      // console.log(window.Kakao);
-      //   window.Kakao.Auth.login({
-      //     scope: "account_email, gender",
-      //     success: this.GetMe,
-      //   });
-      this.$kakao.Auth.login({
-        success(authObj) {
-          alert(JSON.stringify(authObj));
-        },
-        fail(err) {
-          alert(JSON.stringify(err));
-        },
+      console.log(window.Kakao);
+      window.Kakao.Auth.login({
+        scope: "account_email",
+        success: this.GetMe,
       });
+      // this.$kakao.Auth.login({
+      //   success(authObj) {
+      //     alert(JSON.stringify(authObj));
+      //     console.log(JSON.stringify(authObj));
+      //   },
+      //   fail(err) {
+      //     alert(JSON.stringify(err));
+      //   },
+      // });
     },
     GetMe(authObj) {
-      console.log(authObj);
+      console.log("authObj", authObj);
       window.Kakao.API.request({
         url: "/v2/user/me",
         success: (res) => {
           const kakao_account = res.kakao_account;
-          console.log(res);
+          console.log("res", res);
           const userInfo = {
             email: kakao_account.email,
             password: "",
             account_type: 2,
           };
 
-          axios
-            .post(`http://localhost:8080/account/kakaologin`, {
-              email: userInfo.email,
-            })
-            .then((res) => {
-              console.log(res);
-              console.log("데이터베이스에 회원 정보가 있음!");
-            })
-            .catch((err) => {
-              console.log(err);
-              console.log("데이터베이스에 회원 정보가 없음!");
-            });
-          console.log(userInfo);
+          // axios
+          //   .post("http://localhost:8080/account/kakaologin", {
+          //     email: userInfo.email,
+          //   })
+          //   .then((res) => {
+          //     console.log(res);
+          //     console.log("데이터베이스에 회원 정보가 있음!");
+          //   })
+          //   .catch((err) => {
+          //     console.log(err);
+          //     console.log("데이터베이스에 회원 정보가 없음!");
+          //   });
+          console.log("userInfo", userInfo);
           alert("로그인 성공!");
-          this.$bvModal.hide("bv-modal-example");
+          // this.$bvModal.hide("bv-modal-example");
+        },
+        fail: (error) => {
+          this.$router.push("/errorPage");
+          console.log(error);
+        },
+      });
+    },
+    kakaoLogout(authObj) {
+      console.log("authObj", authObj);
+      window.Kakao.API.request({
+        url: "/v1/user/logout",
+        success: (res) => {
+          const kakao_account = res.kakao_account;
+          console.log("res", res);
+          const userInfo = {
+            email: kakao_account.email,
+            password: "",
+            account_type: 2,
+          };
+          console.log("userInfo", userInfo);
+          alert("로그인 성공!");
         },
         fail: (error) => {
           this.$router.push("/errorPage");
